@@ -1,6 +1,19 @@
-const fs = require('fs');
-const path = require('path');
-const { exec, execSync } = require('child_process');
+import { exec } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
+const __dirname = import.meta.url;
+
+console.log(exec);
+
+function execShellCommand(cmd) {
+  return new Promise((res) => {
+    exec(cmd, (_, stdout, stderr) => {
+      res(stdout ? stdout : stderr);
+    });
+  });
+}
 
 function clearAndUpper(text) {
   return text.replace(/-/, '').toUpperCase();
@@ -14,7 +27,7 @@ function toPascalCase(text) {
   return text.replace(/(^\w|-\w)/g, clearAndUpper);
 }
 
-const folder = path.join(__dirname, 'heroicons');
+const folder = join(__dirname, 'heroicons');
 const iconsFolder = __dirname; // Beware that this could break if the file is moved
 
 const gitRepo = 'git clone https://github.com/tailwindlabs/heroicons.git';
@@ -27,61 +40,66 @@ const iconTypes = {
   'tiny-solid': ['20', 'solid']
 };
 
-const processRepo = () => {
+const processRepo = async () => {
   try {
-    Object.entries(iconTypes).forEach(([svgType, iconPath]) => {
-      const srcFolder = path.join(folder, 'optimized', ...iconPath);
-      const outFolder = path.join(iconsFolder, svgType);
-      execSync(`rm -rf ${outFolder}`);
+    const folderPromises = Object.entries(iconTypes).map(async ([svgType, iconPath]) => {
+      const srcFolder = join(folder, 'optimized', ...iconPath);
+      const outFolder = join(iconsFolder, svgType);
+      await execShellCommand(`rm -rf ${outFolder}`);
 
-      if (!fs.existsSync(outFolder)) {
+      if (!existsSync(outFolder)) {
         console.log(`Creating ${outFolder}`);
-        fs.mkdirSync(outFolder);
+        await mkdir(outFolder);
       }
 
       console.log(`Moving icons from ${srcFolder} to ${outFolder}!`);
-      fs.readdirSync(srcFolder).map((svg) => {
-        const src = path.join(srcFolder, svg);
+      const iconFiles = await readdir(srcFolder);
+      const iconPromises = iconFiles.map(async (svg) => {
+        const src = join(srcFolder, svg);
 
-        let everythingButExtension = svg.substr(0, svg.lastIndexOf('.'));
-        let outName = everythingButExtension + '-' + svgType;
+        const everythingButExtension = svg.slice(0, svg.lastIndexOf('.'));
+        const outName = everythingButExtension + '-' + svgType;
         const outFileName = `${outName}.tsx`;
-        const out = path.join(outFolder, outFileName);
+        const out = join(outFolder, outFileName);
         const pascalName = toPascalCase(outName);
-        let contents = fs.readFileSync(src).toString();
+        const original = (await readFile(src)).toString();
 
         // React has different names for these (ie. they are camel cased)
-        contents = contents.replace(/(clip-rule|fill-rule|stroke-linecap|stroke-linejoin|stroke-width)/g, (match) => {
-          return toCamelCase(match);
-        });
+        const processed = original
+          .replace(/(clip-rule|fill-rule|stroke-linecap|stroke-linejoin|stroke-width)/g, (match) => {
+            return toCamelCase(match);
+          })
+          .replace(/ fill="#fff"/, '')
+          .replace(/ stroke="#[a-zA-Z0-9]+"/, ' stroke="currentColor"')
+          .trim()
+          .split('\n')
+          .join('\n    ');
 
-        // Tracking for these issues https://github.com/tailwindlabs/heroicons/issues/93
-        // Remove fill in academic-cap.svg and truck.svg
-        // Also remove hardcoded stroke in arrows-expand, folder-add, folder-download and folder-remove
-        contents = contents.replace(/ fill="#fff"/, '');
-        contents = contents.replace(/ stroke="#[a-zA-Z0-9]+"/, ' stroke="currentColor"');
+        imports.push([join(svgType, outFileName), pascalName]);
 
-        imports.push([path.join(svgType, outFileName), pascalName]);
+        const component = `<svg {...props} ref={ref} ${processed.slice(4)}`;
 
-        let processed = contents.trim().split('\n').join('\n    ');
-        processed = `<svg {...props} ref={ref} ${processed.substr(4)}`;
-
-        fs.writeFileSync(
+        await writeFile(
           out,
           `
-import React from "react";
+import { h } from "preact";
+import { forwardRef } from "preact/compat";
+import { JSXInternal } from 'preact/src/jsx';
 
-export const ${pascalName} = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => {
+export const ${pascalName} = forwardRef<SVGSVGElement, JSXInternal.SVGAttributes & JSXInternal.HTMLAttributes>((props, ref) => {
   return (
-    ${processed}
+    ${component}
   )
 })
           `.trim() + '\n'
         );
       });
+
+      await Promise.all(iconPromises);
     });
 
-    fs.writeFileSync(
+    await Promise.all(folderPromises);
+    await writeFile(
       'index.ts',
       imports
         .sort(([_, a], [__, b]) => a.localeCompare(b))
@@ -91,18 +109,17 @@ export const ${pascalName} = React.forwardRef<SVGSVGElement, React.SVGProps<SVGS
         })
         .join('\n') + '\n'
     );
-  } finally {
-    // console.log("Removing the repo...");
-    // exec(`rm -rf ${folder}`);
+  } catch (e) {
+    console.error(e);
   }
 };
 
-console.log(`Cloning ${gitRepo} to ${folder}`);
-exec(`${gitRepo} ${folder}`, (error) => {
-  if (error) {
-    console.log('The repo already exists!');
-  } else {
-    console.log('Successfully cloned the repo!');
-  }
-  processRepo();
-});
+(async () => {
+  console.time('Generating Icon Components');
+  console.log(`Cloning ${gitRepo} to ${folder}`);
+  await execShellCommand(`${gitRepo} ${folder}`);
+  await processRepo();
+  console.log('Removing the repo...');
+  await execShellCommand(`rm -rf ${folder}`);
+  console.timeEnd('Generating Icon Components');
+})();
