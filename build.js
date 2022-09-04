@@ -1,9 +1,9 @@
 import { exec } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 
-const __dirname = import.meta.url;
+const __dirname = dirname(new URL(import.meta.url).pathname);
 
 console.log(exec);
 
@@ -48,11 +48,8 @@ const processRepo = async () => {
       await execShellCommand(`rm -rf ${outFolder}`);
 
       if (!existsSync(outFolder)) {
-        console.log(`Creating ${outFolder}`);
         await mkdir(outFolder);
       }
-
-      console.log(`Moving icons from ${srcFolder} to ${outFolder}!`);
       const iconFiles = await readdir(srcFolder);
       const iconPromises = iconFiles.map(async (svg) => {
         const src = join(srcFolder, svg);
@@ -99,14 +96,12 @@ export const ${pascalName} = forwardRef<SVGSVGElement, JSXInternal.SVGAttributes
     });
 
     await Promise.all(folderPromises);
+    console.log(`Built ${imports.length} icons!`);
     await writeFile(
       'index.ts',
       imports
         .sort(([_, a], [__, b]) => a.localeCompare(b))
-        .map(([importPath, name]) => {
-          console.log(`↳ ${name}`);
-          return `export { ${name} } from "./${importPath.split('.')[0]}";`;
-        })
+        .map(([importPath, name]) => `export { ${name} } from "./${importPath.split('.')[0]}";`)
         .join('\n') + '\n'
     );
   } catch (e) {

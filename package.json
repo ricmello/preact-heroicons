@@ -1,6 +1,6 @@
 {
   "name": "@ekwoka/preact-heroicons",
-  "version": "2.0.0",
+  "version": "0.0.1",
   "description": "Heroicons as Preact components",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
   "sideEffects": false,
   "scripts": {
     "generate": "node build.js",
-    "bundle": "tsc",
+    "bundle": "rm -rf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
