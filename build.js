@@ -27,6 +27,34 @@ function toPascalCase(text) {
   return text.replace(/(^\w|-\w)/g, clearAndUpper);
 }
 
+function pipe(...fns) {
+  return (x) => fns.reduce((v, f) => f(v), x);
+}
+
+function spreadProps(svg) {
+  return svg.replace(/<svg/, `<svg {...props} ref={ref}`);
+}
+
+function convertSvgPropsToPreactProps(svg) {
+  return svg.replace(/(clip-rule|fill-rule|stroke-linecap|stroke-linejoin|stroke-width)/g, (match) => {
+    return toCamelCase(match);
+  });
+}
+
+function removeFill(svg) {
+  return svg.replace(/ fill="#fff"/, '');
+}
+
+function setStrokeToCurrent(svg) {
+  return svg.replace(/stroke="#[a-zA-Z0-9]+"/, ' stroke="currentColor"');
+}
+
+function properlyIndent(svg) {
+  return svg.trim().split('\n').join('\n    ');
+}
+
+const processSVG = pipe(spreadProps, convertSvgPropsToPreactProps, removeFill, setStrokeToCurrent, properlyIndent);
+
 const folder = join(__dirname, 'heroicons');
 const iconsFolder = __dirname; // Beware that this could break if the file is moved
 
@@ -60,21 +88,9 @@ const processRepo = async () => {
         const out = join(outFolder, outFileName);
         const pascalName = toPascalCase(outName);
         const original = (await readFile(src)).toString();
-
-        // React has different names for these (ie. they are camel cased)
-        const processed = original
-          .replace(/(clip-rule|fill-rule|stroke-linecap|stroke-linejoin|stroke-width)/g, (match) => {
-            return toCamelCase(match);
-          })
-          .replace(/ fill="#fff"/, '')
-          .replace(/ stroke="#[a-zA-Z0-9]+"/, ' stroke="currentColor"')
-          .trim()
-          .split('\n')
-          .join('\n    ');
-
         imports.push([join(svgType, outFileName), pascalName]);
 
-        const component = `<svg {...props} ref={ref} ${processed.slice(4)}`;
+        const component = processSVG(original);
 
         await writeFile(
           out,
