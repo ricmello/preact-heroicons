@@ -1,6 +1,6 @@
 {
   "name": "preact-heroicons",
-  "version": "2.0.10",
+  "version": "2.0.10-rc.1",
   "description": "Heroicons as Preact components",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   "keywords": [
     "heroicons",
     "svg",
-    "react",
+    "preact",
     "icons",
     "icon"
   ],
@@ -29,12 +29,12 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/graywolftech/react-heroicons/issues"
+    "url": "https://github.com/ekwoka/preact-heroicons/issues"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/graywolftech/react-heroicons#readme",
+  "homepage": "https://github.com/ekwoka/preact-heroicons#readme",
   "files": [
     "dist"
   ],

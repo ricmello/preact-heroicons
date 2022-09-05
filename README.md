@@ -59,12 +59,16 @@ The types used to define the Icons come from `preact/jsx`.
 As a convenience, the type of the components is provided by importing `HeroIcon` from the main package.
 
 ```js
-import { HeroIcon } from "preact-heroicons";
+import { HeroIcon } from 'preact-heroicons';
 
 const Icons: HeroIcon[] = [];
 ```
 
 This can be useful when you want to construct objects containing HeroIcons and want to ensure strict typing.
+
+## Use with other JSX Factories
+
+These components, as bundled, contained preserved JSX. This means that they can be used with other JSX Factories, incuding any custom factories, or even `React.createElement`. By default `h` is imported, and when your bundler is set up correctly, this the JSX will be transformed into an `h` call. However, some bundlers can inject a custom JSX factory and transform the JSX into a call to that.
 
 ## Thanks
 
