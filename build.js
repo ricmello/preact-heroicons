@@ -81,9 +81,9 @@ const processRepo = async () => {
           `
 import { h } from "preact";
 import { forwardRef } from "preact/compat";
-import { JSXInternal } from 'preact/src/jsx';
+import { HeroIcon } from "../types";
 
-export const ${pascalName} = forwardRef<SVGSVGElement, JSXInternal.SVGAttributes & JSXInternal.HTMLAttributes>((props, ref) => {
+export const ${pascalName}: HeroIcon = forwardRef((props, ref) => {
   return (
     ${component}
   )
@@ -102,7 +102,9 @@ export const ${pascalName} = forwardRef<SVGSVGElement, JSXInternal.SVGAttributes
       imports
         .sort(([_, a], [__, b]) => a.localeCompare(b))
         .map(([importPath, name]) => `export { ${name} } from "./${importPath.split('.')[0]}";`)
-        .join('\n') + '\n'
+        .join('\n') +
+        '\n' +
+        `export type { HeroIcon } from "./types";`
     );
   } catch (e) {
     console.error(e);
