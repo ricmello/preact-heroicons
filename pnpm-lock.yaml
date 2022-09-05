@@ -2,13 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   preact: ^10.10.6
-  prettier: ^2.2.1
-  typescript: ^3.8.3
+  prettier: ^2.7.1
+  typescript: ^4.8.2
 
 devDependencies:
   preact: 10.10.6
   prettier: 2.7.1
-  typescript: 3.9.10
+  typescript: 4.8.2
 
 packages:
 
@@ -22,8 +22,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript/3.9.10:
-    resolution: {integrity: sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==}
+  /typescript/4.8.2:
+    resolution: {integrity: sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

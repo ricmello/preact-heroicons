@@ -40,10 +40,10 @@
   ],
   "devDependencies": {
     "preact": "^10.10.6",
-    "prettier": "^2.2.1",
-    "typescript": "^3.8.3"
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
   },
   "peerDependencies": {
-    "preact": "^10"
+    "preact": "9 - 10"
   }
 }
