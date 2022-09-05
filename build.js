@@ -65,7 +65,7 @@ const imports = [];
 const iconTypes = {
   outline: ['24', 'outline'],
   solid: ['24', 'solid'],
-  'tiny-solid': ['20', 'solid']
+  'mini-solid': ['20', 'solid']
 };
 
 const processRepo = async () => {
