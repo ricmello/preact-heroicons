@@ -10,7 +10,7 @@
     "generate": "node build.js",
     "bundle": "rm -rf dist && tsc",
     "release": "run-s generate bundle publish",
-    "publish": "pnpm publish --access public --publish-branch preact-heroicons --dry-run",
+    "publish": "pnpm publish --access public --publish-branch preact-heroicons",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
