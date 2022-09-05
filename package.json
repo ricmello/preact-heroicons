@@ -9,6 +9,8 @@
   "scripts": {
     "generate": "node build.js",
     "bundle": "rm -rf dist && tsc",
+    "release": "run-s generate bundle publish",
+    "publish": "pnpm publish --access public --publish-branch preact-heroicons --dry-run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -45,5 +47,8 @@
   },
   "peerDependencies": {
     "preact": "9 - 10"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
