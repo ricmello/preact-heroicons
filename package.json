@@ -1,6 +1,6 @@
 {
   "name": "preact-heroicons",
-  "version": "2.0.10-rc.1",
+  "version": "2.0.10-rc.2",
   "description": "Heroicons as Preact components",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,10 +13,7 @@
     "publish": "pnpm publish --access public --publish-branch preact-heroicons",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/graywolftech/react-heroicons.git"
-  },
+  "repository": "github:ekwoka/preact-heroicons",
   "keywords": [
     "heroicons",
     "svg",
