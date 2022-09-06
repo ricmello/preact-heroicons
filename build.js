@@ -117,10 +117,10 @@ export const ${pascalName}: HeroIcon = forwardRef((props, ref) => {
       'index.ts',
       imports
         .sort(([_, a], [__, b]) => a.localeCompare(b))
-        .map(([importPath, name]) => `export { ${name} } from "./${importPath.split('.')[0]}.jsx";`)
+        .map(([importPath, name]) => `export { ${name} } from "./${importPath.split('.')[0]}";`)
         .join('\n') +
         '\n' +
-        `export type { HeroIcon } from "./types.js";`
+        `export type { HeroIcon } from "./types";`
     );
   } catch (e) {
     console.error(e);
