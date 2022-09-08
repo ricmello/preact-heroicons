@@ -7,7 +7,7 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "build": "npm run-s generate bundle",
+    "build": "run-s generate bundle",
     "generate": "node build.js",
     "bundle": "rm -rf dist && tsc",
     "release": "run-s build npm",
