@@ -95,6 +95,7 @@ const processRepo = async () => {
         await writeFile(
           out,
           `
+/** @jsx h */
 import { h } from "preact";
 import { forwardRef } from "preact/compat";
 import { HeroIcon } from "../types";

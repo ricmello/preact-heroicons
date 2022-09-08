@@ -28,11 +28,11 @@ yarn add preact-heroicons
 bun install preact-heroicons
 ```
 
-> Note: For Deno, you can import from `npm:preact-heroicons`
+> Note: For Deno, you can import from `https://esm.sh/preact-heroicons`
 
-Now you have access to the entire `heroicons` library! They are formatted as [pascal case](https://techterms.com/definition/pascalcase) and have `Solid`(solid format) or `Outline` (outline format) appended at the end based on type.
+Now you have access to the entire `heroicons` library! They are formatted as [pascal case](https://techterms.com/definition/pascalcase) and have `Solid` (solid format) or `Outline` (outline format) appended at the end based on type.
 
-Mini Icons (Heroicons v2.0) are accessible by appending MiniSolid` to the name provided on HeroIcons
+Mini Icons (Heroicons v2.0) are accessible by appending `MiniSolid` to the name provided on HeroIcons.
 
 ```tsx
 import { ArchiveBoxSolid } from "preact-heroicons";
@@ -68,7 +68,7 @@ This can be useful when you want to construct objects containing HeroIcons and w
 
 ## Use with other JSX Factories
 
-These components, as bundled, contained preserved JSX. This means that they can be used with other JSX Factories, incuding any custom factories, or even `React.createElement`. By default `h` is imported, and when your bundler is set up correctly, this the JSX will be transformed into an `h` call. However, some bundlers can inject a custom JSX factory and transform the JSX into a call to that.
+To ensure compatibility with automated bundler systems, these icons will, use preact.h as their JSX factory. To use your own JSX factory, you'll need to alias `preact` to something else that exports a jsx function as `h` in your bundlers settings.
 
 ## Thanks
 
