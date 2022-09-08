@@ -7,11 +7,11 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
+    "build": "npm run-s generate bundle",
     "generate": "node build.js",
     "bundle": "rm -rf dist && tsc",
-    "release": "run-s generate bundle publish",
-    "publish": "pnpm publish --access public --publish-branch preact-heroicons",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "run-s build npm",
+    "npm": "pnpm publish --access public --publish-branch preact-heroicons"
   },
   "repository": "github:ekwoka/react-heroicons/tree/preact-heroicons",
   "keywords": [
