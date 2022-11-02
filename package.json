@@ -14,7 +14,7 @@
     "npm": "pnpm publish --access public --publish-branch preact-heroicons",
     "release": "run-s build npm"
   },
-  "repository": "github:ekwoka/react-heroicons/tree/preact-heroicons",
+  "repository": "github:ekwoka/preact-heroicons",
   "keywords": [
     "heroicons",
     "svg",
@@ -29,12 +29,12 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ekwoka/react-heroicons/tree/preact-heroicons/issues"
+    "url": "https://github.com/ekwoka/preact-heroicons/issues"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/ekwoka/react-heroicons/tree/preact-heroicons#readme",
+  "homepage": "https://github.com/ekwoka/preact-heroicons#readme",
   "files": [
     "dist"
   ],
