@@ -8,10 +8,11 @@
   "sideEffects": false,
   "scripts": {
     "build": "run-s generate bundle",
-    "generate": "node build.js",
     "bundle": "rm -rf dist && tsc",
-    "release": "run-s build npm",
-    "npm": "pnpm publish --access public --publish-branch preact-heroicons"
+    "checkversion": "node scripts/checkversion.js",
+    "generate": "node build.js",
+    "npm": "pnpm publish --access public --publish-branch preact-heroicons",
+    "release": "run-s build npm"
   },
   "repository": "github:ekwoka/react-heroicons/tree/preact-heroicons",
   "keywords": [
@@ -39,11 +40,11 @@
   ],
   "devDependencies": {
     "npm-run-all": "^4.1.5",
-    "preact": "^10.11.1",
+    "preact": "^10.11.2",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4"
   },
   "peerDependencies": {
-    "preact": "9 - 10"
+    "preact": "9 - 11"
   }
 }

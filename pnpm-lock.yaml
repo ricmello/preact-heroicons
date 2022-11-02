@@ -2,13 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   npm-run-all: ^4.1.5
-  preact: ^10.11.1
+  preact: ^10.11.2
   prettier: ^2.7.1
   typescript: ^4.8.4
 
 devDependencies:
   npm-run-all: 4.1.5
-  preact: 10.11.1
+  preact: 10.11.2
   prettier: 2.7.1
   typescript: 4.8.4
 
@@ -409,8 +409,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /preact/10.11.1:
-    resolution: {integrity: sha512-1Wz5PCRm6Fg+6BTXWJHhX4wRK9MZbZBHuwBqfZlOdVm2NqPe8/rjYpufvYCwJSGb9layyzB2jTTXfpCTynLqFQ==}
+  /preact/10.11.2:
+    resolution: {integrity: sha512-skAwGDFmgxhq1DCBHke/9e12ewkhc7WYwjuhHB8HHS8zkdtITXLRmUMTeol2ldxvLwYtwbFeifZ9uDDWuyL4Iw==}
     dev: true
 
   /prettier/2.7.1:
