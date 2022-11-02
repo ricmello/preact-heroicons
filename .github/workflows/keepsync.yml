@@ -1,0 +1,25 @@
+name: Sync to Heroicons
+on:
+  schedule:
+    - cron: '20 4 * * 0,3,5'
+  workflow_dispatch:
+
+jobs:
+  Build-Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          always-auth: true
+
+      - name: Checks Upstream
+        run: npm run checkversion
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Syncs Version to Heroicons
