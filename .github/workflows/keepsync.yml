@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build-Publish:
+  Check-Version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

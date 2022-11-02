@@ -1,6 +1,6 @@
 {
   "name": "preact-heroicons",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "Heroicons as Preact components",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
