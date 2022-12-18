@@ -126,7 +126,7 @@ export const ${pascalName}: HeroIcon = forwardRef((props, ref) => {
         .sort(([_, a], [__, b]) => a.localeCompare(b))
         .map(
           ([importPath, name]) =>
-            `export { ${name} } from "./${importPath.split('.')[0]}";`
+            `export { ${name} } from "./${importPath.split('.')[0]}.js";`
         )
         .join('\n') +
         '\n' +
