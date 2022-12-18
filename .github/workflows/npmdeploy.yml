@@ -18,6 +18,9 @@ jobs:
           node-version: 18
           always-auth: true
 
+      - name: Compare Versions
+        run: npm run ./scripts/predeploy.js
+
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
         id: pnpm-install

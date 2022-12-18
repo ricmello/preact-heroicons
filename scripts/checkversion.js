@@ -10,11 +10,18 @@ function execShellCommand(cmd) {
   });
 }
 
-const version = (await execShellCommand('npm info @heroicons/react version')).trim();
-const ourPackage = await readFile('package.json', 'utf8').then((data) => JSON.parse(data));
+const version = (
+  await execShellCommand('npm info @heroicons/react version')
+).trim();
+const ourPackage = await readFile('package.json', 'utf8').then((data) =>
+  JSON.parse(data)
+);
 const ourVersion = ourPackage.version;
 
-const isOutdated = ourVersion.split('.').length > 3 || /-/.test(ourVersion) || version > ourVersion.split('.').slice(0, 3).join('.');
+const isOutdated =
+  (/-/.test(ourVersion) &&
+    version === ourVersion.split('.').slice(0, 3).join('.')) ||
+  version > ourVersion.split('.').slice(0, 3).join('.');
 
 console.log('React Heroicons:', version);
 console.log('Preact Heroicons', ourVersion);
