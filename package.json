@@ -1,6 +1,6 @@
 {
   "name": "preact-heroicons",
-  "version": "2.0.13",
+  "version": "2.0.14-rc.1",
   "description": "Heroicons as Preact components",
   "types": "./dist/index.d.mts",
   "exports": {
