@@ -1,7 +1,7 @@
-[<img src="https://img.shields.io/npm/v/preact-heroicons?style=for-the-badge">](https://www.npmjs.com/package/preact-heroicons)
+[<img src="https://img.shields.io/npm/v/preact-heroicons?label=%20&style=for-the-badge&logo=pnpm&logoColor=white">](https://www.npmjs.com/package/preact-heroicons)
 <img src="https://img.shields.io/npm/types/preact-heroicons?label=%20&amp;logo=typescript&amp;logoColor=white&amp;style=for-the-badge">
-<img src="https://img.shields.io/npm/dt/preact-heroicons?style=for-the-badge" >
-[<img src="https://img.shields.io/bundlephobia/minzip/preact-heroicons?style=for-the-badge">](https://bundlephobia.com/package/preact-heroicons)
+<img src="https://img.shields.io/npm/dt/preact-heroicons?style=for-the-badge&logo=npm&logoColor=white&logo=npm&logoColor=white&logo=npm&logoColor=white" >
+[<img src="https://img.shields.io/bundlephobia/minzip/preact-heroicons?style=for-the-badge&logo=esbuild&logoColor=white">](https://bundlephobia.com/package/preact-heroicons)
 
 # Preact Heroicons
 
