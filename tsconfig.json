@@ -5,6 +5,8 @@
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "outDir": "dist",
     "target": "esNext",
     "module": "es2020",
