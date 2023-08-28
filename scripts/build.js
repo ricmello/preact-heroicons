@@ -30,7 +30,7 @@ function pipe(...fns) {
 }
 
 function spreadProps(svg) {
-  return svg.replace(/<svg/, `<svg {...props} ref={ref}`);
+  return svg.replace(/<svg/, `<svg width="1em" height="1em" {...props} ref={ref}`);
 }
 
 function convertSvgPropsToPreactProps(svg) {
@@ -38,7 +38,7 @@ function convertSvgPropsToPreactProps(svg) {
     /(clip-rule|fill-rule|stroke-linecap|stroke-linejoin|stroke-width)/g,
     (match) => {
       return toCamelCase(match);
-    }
+    },
   );
 }
 
@@ -59,7 +59,7 @@ const processSVG = pipe(
   convertSvgPropsToPreactProps,
   removeFill,
   setStrokeToCurrent,
-  properlyIndent
+  properlyIndent,
 );
 
 const heroicons = join(__dirname, 'heroicons');
@@ -112,12 +112,12 @@ export const ${pascalName}: HeroIcon = forwardRef((props, ref) => {
     ${component}
   )
 })
-          `.trim() + '\n'
+          `.trim() + '\n',
           );
         });
 
         await Promise.all(iconPromises);
-      }
+      },
     );
 
     await Promise.all(folderPromises);
@@ -128,11 +128,11 @@ export const ${pascalName}: HeroIcon = forwardRef((props, ref) => {
         .sort(([_, a], [__, b]) => a.localeCompare(b))
         .map(
           ([importPath, name]) =>
-            `export { ${name} } from "./${importPath.split('.')[0]}";`
+            `export { ${name} } from "./${importPath.split('.')[0]}";`,
         )
         .join('\n') +
         '\n' +
-        `export type { HeroIcon } from "./types";`
+        `export type { HeroIcon } from "./types";`,
     );
   } catch (e) {
     console.error(e);

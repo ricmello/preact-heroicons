@@ -1,7 +1,6 @@
 import { FunctionalComponent, JSX, Ref } from 'preact';
-import { JSXInternal } from 'preact/src/jsx';
 
-export type HeroIconAttrs = JSXInternal.SVGAttributes & JSXInternal.HTMLAttributes;
+export type HeroIconAttrs = JSX.SVGAttributes & JSX.HTMLAttributes;
 
 export type HeroIcon = FunctionalComponent<
   Omit<JSX.SVGAttributes<SVGElement> & JSX.HTMLAttributes<EventTarget>, 'ref'> & {
