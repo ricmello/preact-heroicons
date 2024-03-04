@@ -1,7 +1,7 @@
 {
   "name": "@ricmello/preact-heroicons",
   "version": "1.0.1",
-  "description": "Heroicons as Preact components - compatible with Parceljs",
+  "description": "Heroicons as Preact components - compatible with Vite and Parceljs",
   "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
   "exports": {
@@ -20,7 +20,7 @@
     "npm": "pnpm publish --access public",
     "release": "run-s build npm"
   },
-  "repository": "github:ekwoka/preact-heroicons",
+  "repository": "github:ricmello/preact-heroicons",
   "keywords": [
     "heroicons",
     "svg",
@@ -40,7 +40,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/ekwoka/preact-heroicons#readme",
+  "homepage": "https://github.com/ricmello/preact-heroicons#readme",
   "files": [
     "dist"
   ],
