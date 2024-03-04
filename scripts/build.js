@@ -128,7 +128,8 @@ export const ${pascalName}: HeroIcon = forwardRef((props, ref) => {
         .sort(([_, a], [__, b]) => a.localeCompare(b))
         .map(
           ([importPath, name]) =>
-            `export { ${name} } from "./${importPath.split('.')[0]}";`,
+            // mandatory file extensions: https://nodejs.org/api/esm.html#esm_mandatory_file_extensions
+            `export { ${name} } from "./${importPath.split('.')[0]}.js";`,
         )
         .join('\n') +
         '\n' +
